@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Ashley 💙</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: #eaf2f8;
+    font-family: "Comic Sans MS", cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ✉️ ENVELOPE */
+.envelope {
+    width: 300px;
+    height: 200px;
+    background: #b0c4de;
+    position: absolute;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10; /* FIX: Keeps envelope on top so you can click it */
+}
+
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #a7c7e7;
+    clip-path: polygon(0 0, 50% 60%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.8s ease;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+/* CARD + COLLAGE */
+.card, .collage {
+    background: #ffffff;
+    width: 85vw;
+    max-width: 1000px;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border: 4px dashed #b0c4de;
+    position: absolute;
+    transition: all 0.8s ease;
+}
+
+.card { 
+    opacity: 0; /* hidden until envelope opens */
+    pointer-events: none; /* FIX: Prevents invisible card from blocking your clicks */
+}
+
+.collage {
+    opacity: 0;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    justify-items: center;
+}
+
+h1 {
+    color: #5f7c99;
+    text-align: center;
+    font-size: 34px;
+}
+
+.story {
+    color: #444;
+    font-size: 19px;
+    line-height: 1.8;
+    margin-top: 25px;
+    text-align: center;
+}
+
+button {
+    margin-top: 35px;
+    padding: 14px 28px;
+    border-radius: 18px;
+    border: none;
+    background-color: #a7c7e7;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #89b4da;
+    transform: scale(1.08);
+}
+
+.polaroid {
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.polaroid:hover {
+    transform: scale(1.08) rotate(0deg);
+}
+
+.polaroid img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.caption {
+    margin-top: 6px;
+    font-size: 13px;
+    text-align: center;
+    color: #5f7c99;
+}
+
+/* 🎊 EMOJI FLOAT */
+.emoji {
+    position: fixed;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" id="envelope" onclick="openEnvelope()">
+    <div class="flap"></div>
+</div>
+
+<div class="card" id="card">
+    <h1>Happy Birthday, Ashley 🫶</h1>
+
+    <div class="story">
+        Once upon a time, there was someone who was quiet, reserved and
+        slightly funny, but somehow always
+        there in the best way.
+
+        You’re the kind of person who doesn’t need to be loud
+        to be memorable.
+        The kind of person that people feel comfortable around
+        without really realising why.
+
+        Also the kind of person who would probably read this and go
+        “heh.”
+
+        I hope this year is easy in a good way where
+        everything just works out,
+        life feels a bit lighter,
+        And you find small moments that make you pause and smile. Standard yap.
+
+        Glad to have met you :)
+
+        Happy Birthday ASHLEY PENG
+    </div>
+
+    <div style="text-align:center;">
+        <button onclick="openSurprise()">
+            Open your surprise 🎁
+        </button>
+    </div>
+</div>
+
+<div class="collage" id="collage">
+
+    <div class="polaroid"><img src="photo1.jpg"><div class="caption">heh</div></div>
+    <div class="polaroid"><img src="photo2.jpg"><div class="caption">mickey era</div></div>
+    <div class="polaroid"><img src="photo3.jpg"><div class="caption">LMAO</div></div>
+    <div class="polaroid"><img src="photo4.jpg"><div class="caption">lowkey funny</div></div>
+    <div class="polaroid"><img src="photo5.jpg"><div class="caption">just vibes</div></div>
+    <div class="polaroid"><img src="photo6.jpg"><div class="caption">this was a moment</div></div>
+    <div class="polaroid"><img src="photo7.jpg"><div class="caption">your first vp event!!!</div></div>
+    <div class="polaroid"><img src="photo8.jpg"><div class="caption">idk but good</div></div>
+    <div class="polaroid"><img src="photo9.jpg"><div class="caption">how it all started</div></div>
+    <div class="polaroid"><img src="photo10.jpg"><div class="caption">main character quietly</div></div>
+
+</div>
+
+<script>
+function openEnvelope() {
+    document.getElementById("envelope").classList.add("open");
+
+    setTimeout(() => {
+        // FIX: Hide envelope completely so the button underneath works
+        document.getElementById("envelope").style.display = "none";
+        
+        let card = document.getElementById("card");
+        card.style.opacity = "1";
+        card.style.pointerEvents = "auto"; // FIX: Allow clicks on the card now that it is visible
+    }, 800);
+}
+
+function openSurprise() {
+
+    // hide card
+    document.getElementById("card").style.opacity = "0";
+    document.getElementById("card").style.pointerEvents = "none";
+
+    // show collage
+    let collage = document.getElementById("collage");
+    collage.style.opacity = "1";
+    collage.style.pointerEvents = "auto";
+
+    // open music
+    window.open("https://www.youtube.com/watch?v=1QSBh451xwc", "_blank");
+
+    // 🎊 floating emojis
+    setInterval(() => {
+        let e = document.createElement("div");
+        e.className = "emoji";
+        e.innerHTML = "🎊";
+        e.style.left = Math.random() * 100 + "vw";
+        e.style.bottom = "0px";
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 5000);
+    }, 300);
+}
+</script>
+
+</body>
+</html>
